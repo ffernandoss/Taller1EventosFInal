@@ -5,8 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,37 +27,54 @@ class MainActivity : ComponentActivity() {
         setContent {
             Taller1EventosTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val greetingMessage = mensajeDeBienvenida()
+                    val mensaje = mensajeDeBienvenida()
                     Greeting(
-                        name = greetingMessage,
-                        modifier = Modifier.padding(innerPadding)
+                        name = mensaje,
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .fillMaxWidth()
+                            .padding(innerPadding)
+                            .background(Color.White)
                     )
                 }
             }
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun pantallaPrincipal() {
     Taller1EventosTheme {
-       val mensaje= mensajeDeBienvenida(modifier=Modifier.fillMaxSize().padding(16.dp))
-        Text(text = mensaje)
+        val mensaje = mensajeDeBienvenida()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.LightGray)
+                .wrapContentSize()
+
+        ) {
+            Text(
+                text = mensaje,
+                modifier = Modifier
+
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+        }
     }
 }
-    
+
 @Composable
-private fun mensajeDeBienvenida(modifier: Modifier=Modifier): String {
+private fun mensajeDeBienvenida(): String {
     val calendar = Calendar.getInstance()
     val hour = calendar.get(Calendar.HOUR_OF_DAY)
-   if (hour in 6..12) {
-        return "Buenos días"
-    } else if (hour in 13..19) {
-        return "Buenas tardes"
-    } else {
-        return "Buenas noches"
+    return when (hour) {
+        in 6..12 -> "Buenos días"
+        in 13..19 -> "Buenas tardes"
+        else -> "Buenas noches"
     }
-   }
+}
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
