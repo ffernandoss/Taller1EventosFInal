@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(25.dp))
                         Button(
                             onClick = {
-                                val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                                val intent = Intent(this@MainActivity, ActividadPrincipal::class.java)
                                 startActivity(intent)
                             },
                             modifier = Modifier
