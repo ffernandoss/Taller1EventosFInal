@@ -1,15 +1,19 @@
 package com.example.taller1eventos
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,14 +32,31 @@ class MainActivity : ComponentActivity() {
             Taller1EventosTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val mensaje = mensajeDeBienvenida()
-                    Greeting(
-                        name = mensaje,
+                    Column(
                         modifier = Modifier
-                            .wrapContentSize()
-                            .fillMaxWidth()
+                            .fillMaxSize()
+                            .background(Color.LightGray)
                             .padding(innerPadding)
-                            .background(Color.White)
-                    )
+                            .wrapContentSize()
+                    ) {
+                        Text(
+                            text = mensaje,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                        )
+                        Spacer(modifier = Modifier.height(25.dp))
+                        Button(
+                            onClick = {
+                                val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                                startActivity(intent)
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Text("Continuar")
+                        }
+                    }
                 }
             }
         }
@@ -52,15 +73,21 @@ fun pantallaPrincipal() {
                 .fillMaxSize()
                 .background(Color.LightGray)
                 .wrapContentSize()
-
         ) {
             Text(
                 text = mensaje,
                 modifier = Modifier
-
                     .fillMaxWidth()
                     .padding(16.dp)
             )
+            Spacer(modifier = Modifier.height(25.dp))
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Text("Continuar")
+            }
         }
     }
 }
