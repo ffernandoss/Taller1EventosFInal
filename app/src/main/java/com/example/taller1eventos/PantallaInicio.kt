@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.example.taller1eventos.ui.theme.Taller1EventosTheme
 import java.util.Calendar
 
-class MainActivity : ComponentActivity() {
+class PantallaInicio : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(25.dp))
                         Button(
                             onClick = {
-                                val intent = Intent(this@MainActivity, ActividadPrincipal::class.java)
+                                val intent = Intent(this@PantallaInicio, ActividadPrincipal::class.java)
                                 startActivity(intent)
                             },
                             modifier = Modifier
