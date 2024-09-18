@@ -20,16 +20,69 @@ class PantallaConfiguracion : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Taller1EventosTheme {
-                Text("Pantalla de Configuración")
+                ConfiguracionPantalla()
             }
         }
     }
 }
 
-@Preview
 @Composable
-fun PantallaConfiguracionPreview() {
-    Taller1EventosTheme {
+fun ConfiguracionPantalla() {
+    var backgroundColor by remember { mutableStateOf(Color.White) }
+    val context = LocalContext.current
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(backgroundColor)
+            .padding(16.dp)
+    ) {
+        Text("pulsa el boton para cambiar de color", style = MaterialTheme.typography.bodyLarge)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(onClick = { backgroundColor = Color.Red },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+            ) {
+                Text("Rojo")
+            }
+            Button(onClick = { backgroundColor = Color.Green },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Green)) {
+                Text("Verde")
+            }
+            Button(onClick = { backgroundColor = Color.Blue },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)) {
+                Text("Azul")
+            }
+            Button(onClick = { backgroundColor = Color.Yellow },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)) {
+                Text("Amarillo")
+            }
+
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                val intent = Intent(context, PantallaInicio::class.java)
+                context.startActivity(intent)
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Volver a la Pantalla de Inicio")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ConfiguracionPantallaPreview() {
+    Taller1EventosTheme {
+        ConfiguracionPantalla()
     }
 }
