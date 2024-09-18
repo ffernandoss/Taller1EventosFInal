@@ -15,24 +15,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.taller1eventos.ui.theme.Taller1EventosTheme
 
+// Clase principal de la actividad
 class ActividadPrincipal : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Taller1EventosTheme {
-                SegundaPantalla()
+                SegundaPantalla() // Llama a la función composable para mostrar la segunda pantalla
             }
         }
     }
 }
 
+// Función composable que define la segunda pantalla
 @Composable
 fun SegundaPantalla() {
-    var name by remember { mutableStateOf("") }
-    var savedName by remember { mutableStateOf("") }
-    var showDialog by remember { mutableStateOf(false) }
-    val context = LocalContext.current
+    var name by remember { mutableStateOf("") } // Estado para almacenar el nombre ingresado
+    var savedName by remember { mutableStateOf("") } // Estado para almacenar el nombre guardado
+    var showDialog by remember { mutableStateOf(false) } // Estado para controlar la visibilidad del diálogo
+    val context = LocalContext.current // Contexto actual
 
+    // Mostrar un diálogo de alerta si showDialog es verdadero
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
@@ -46,38 +49,43 @@ fun SegundaPantalla() {
         )
     }
 
+    // Columna que contiene todos los elementos de la pantalla
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Yellow)
             .padding(16.dp)
     ) {
+        // Campo de texto para ingresar el nombre
         TextField(
             value = name,
             onValueChange = { name = it },
             label = { Text("Ingrese su nombre") },
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp)) // Espacio entre elementos
+        // Botón para guardar el nombre ingresado
         Button(
             onClick = { savedName = name },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Guardar Nombre")
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp)) // Espacio entre elementos
+        // Texto que muestra el nombre guardado
         Text(
             text = "Nombre guardado: $savedName",
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp)) // Espacio entre elementos
+        // Botón para ir a la pantalla de configuración
         Button(
             onClick = {
                 if (savedName.isNotEmpty()) {
                     val intent = Intent(context, PantallaConfiguracion::class.java)
                     context.startActivity(intent)
                 } else {
-                    showDialog = true
+                    showDialog = true // Mostrar diálogo si no se ha guardado un nombre
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -87,6 +95,7 @@ fun SegundaPantalla() {
     }
 }
 
+// Función de vista previa para la segunda pantalla
 @Preview(showBackground = true)
 @Composable
 fun SegundaPantallaPreview() {

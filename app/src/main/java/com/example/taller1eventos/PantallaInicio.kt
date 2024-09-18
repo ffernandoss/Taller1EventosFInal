@@ -24,14 +24,15 @@ import androidx.compose.ui.unit.dp
 import com.example.taller1eventos.ui.theme.Taller1EventosTheme
 import java.util.Calendar
 
+// Clase principal de la actividad
 class PantallaInicio : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge() // Habilita el modo de borde a borde
         setContent {
             Taller1EventosTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val mensaje = mensajeDeBienvenida()
+                    val mensaje = mensajeDeBienvenida() // Obtiene el mensaje de bienvenida
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
@@ -39,13 +40,15 @@ class PantallaInicio : ComponentActivity() {
                             .padding(innerPadding)
                             .wrapContentSize()
                     ) {
+                        // Muestra el mensaje de bienvenida
                         Text(
                             text = mensaje,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(16.dp)
                         )
-                        Spacer(modifier = Modifier.height(25.dp))
+                        Spacer(modifier = Modifier.height(25.dp)) // Espacio entre elementos
+                        // Botón para continuar a la siguiente actividad
                         Button(
                             onClick = {
                                 val intent = Intent(this@PantallaInicio, ActividadPrincipal::class.java)
@@ -63,24 +66,27 @@ class PantallaInicio : ComponentActivity() {
     }
 }
 
+// Función de vista previa para la pantalla principal
 @Preview(showBackground = true)
 @Composable
 fun pantallaPrincipal() {
     Taller1EventosTheme {
-        val mensaje = mensajeDeBienvenida()
+        val mensaje = mensajeDeBienvenida() // Obtiene el mensaje de bienvenida
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.LightGray)
                 .wrapContentSize()
         ) {
+            // Muestra el mensaje de bienvenida
             Text(
                 text = mensaje,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            Spacer(modifier = Modifier.height(25.dp))
+            Spacer(modifier = Modifier.height(25.dp)) // Espacio entre elementos
+            // Botón para continuar (sin acción definida en la vista previa)
             Button(
                 onClick = { /*TODO*/ },
                 modifier = Modifier
@@ -92,6 +98,7 @@ fun pantallaPrincipal() {
     }
 }
 
+// Función que devuelve un mensaje de bienvenida basado en la hora del día
 @Composable
 private fun mensajeDeBienvenida(): String {
     val calendar = Calendar.getInstance()
@@ -103,6 +110,7 @@ private fun mensajeDeBienvenida(): String {
     }
 }
 
+// Función composable para mostrar un saludo con un nombre
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
