@@ -22,3 +22,5 @@ Este ejercicio está compuesto por las clases `ActividadPrincipal`, `PantallaCon
 ## Clases de Test
 
 - **Descripción**: Tanto la pantalla de `ActividadPrincipal` como la de `PantallaConfiguracion` tienen una clase de test para cada una, las cuales se encuentran dentro del paquete `com.example.taller1eventos`.
+
+- como nota me pondría un 7 porque está todo lo que se pide, está comentado,tiene tests y tiene readme, aunque originalidad no hay 
