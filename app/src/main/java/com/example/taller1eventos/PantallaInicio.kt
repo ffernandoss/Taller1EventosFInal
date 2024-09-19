@@ -100,7 +100,7 @@ fun pantallaPrincipal() {
 
 // Función que devuelve un mensaje de bienvenida basado en la hora del día
 @Composable
-private fun mensajeDeBienvenida(): String {
+fun mensajeDeBienvenida(): String {
     val calendar = Calendar.getInstance()
     val hour = calendar.get(Calendar.HOUR_OF_DAY)
     return when (hour) {

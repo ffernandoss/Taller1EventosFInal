@@ -48,4 +48,9 @@ class ExampleInstrumentedTest {
         // Verificar que se inicia la actividad PantallaConfiguracion
         // Nota: Esto puede requerir una configuración adicional para verificar el cambio de actividad
     }
+
+
+
+
+
 }

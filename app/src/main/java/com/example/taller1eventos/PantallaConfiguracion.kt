@@ -1,5 +1,6 @@
 package com.example.taller1eventos
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,8 +32,19 @@ class PantallaConfiguracion : ComponentActivity() {
 // Función composable que define la pantalla de configuración
 @Composable
 fun ConfiguracionPantalla() {
-    var backgroundColor by remember { mutableStateOf(Color.White) } // Estado para almacenar el color de fondo
-    val context = LocalContext.current // Contexto actual
+    val context = LocalContext.current
+    val sharedPreferences = context.getSharedPreferences("configuracion", Context.MODE_PRIVATE)
+    val savedColor = sharedPreferences.getInt("backgroundColor", Color.White.toArgb())
+    var backgroundColor by remember { mutableStateOf(Color(savedColor)) }
+
+    // Función para guardar el color en SharedPreferences
+    fun saveColor(color: Color) {
+        with(sharedPreferences.edit()) {
+            putInt("backgroundColor", color.toArgb())
+            apply()
+        }
+        backgroundColor = color
+    }
 
     // Columna que contiene todos los elementos de la pantalla
     Column(
@@ -51,23 +64,23 @@ fun ConfiguracionPantalla() {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             // Botón para cambiar el color de fondo a rojo
-            Button(onClick = { backgroundColor = Color.Red },
+            Button(onClick = { saveColor(Color.Red) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
             ) {
                 Text("Rojo")
             }
             // Botón para cambiar el color de fondo a verde
-            Button(onClick = { backgroundColor = Color.Green },
+            Button(onClick = { saveColor(Color.Green) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Green)) {
                 Text("Verde")
             }
             // Botón para cambiar el color de fondo a azul
-            Button(onClick = { backgroundColor = Color.Blue },
+            Button(onClick = { saveColor(Color.Blue) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)) {
                 Text("Azul")
             }
             // Botón para cambiar el color de fondo a amarillo
-            Button(onClick = { backgroundColor = Color.Yellow },
+            Button(onClick = { saveColor(Color.Yellow) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)) {
                 Text("Amarillo")
             }
