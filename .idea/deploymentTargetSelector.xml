@@ -27,6 +27,9 @@
       <SelectionState runConfigName="testGuardarNombre()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="PantallaConfiguracionTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
